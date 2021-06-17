@@ -59,7 +59,12 @@ describe('controller', function () {
 	});
 
 	it('should show entries on start-up', function () {
-		// TODO: write test
+		// TODO: Doit afficher les tâches au démarrage
+		setUpModel([]);
+
+		subject.setView('');
+
+		expect(view.render).toHaveBeenCalledWith('showEntries', [])
 	});
 
 	describe('routing', function () {
@@ -175,19 +180,25 @@ describe('controller', function () {
 
 		it('should update the view', function () {
 			// TODO: Doit mettre à jour l'affichage
-			var todo = {id: 42, title: 'my todo', completed: true};
+			var todo = { id: 42, title: 'my todo', completed: false };
 			setUpModel([todo]);
 			subject.setView('');
 
-			view.trigger('itemToggle', {id: 42, completed: false});
+			view.trigger('itemToggle', { id: 42, completed: true });
 
-			expect(view.render).toHaveBeenCalledWith('elementComplete', {id: 42, completed: false});
+			expect(view.render).toHaveBeenCalledWith('elementComplete', { id: 42, completed: true });
 		});
 	});
 
 	describe('new todo', function () {
 		it('should add a new todo to the model', function () {
 			// TODO: Doit ajouter une nouvelle tâche au model
+			setUpModel([]);
+
+			subject.setView('');
+			view.trigger('newTodo', 'a new todo');
+
+			expect(model.create).toHaveBeenCalledWith('a new todo', jasmine.any(Function));
 		});
 
 		it('should add a new todo to the view', function () {
@@ -228,6 +239,13 @@ describe('controller', function () {
 	describe('element removal', function () {
 		it('should remove an entry from the model', function () {
 			// TODO: Doit enlever une tâche du model
+			var todo = { id: 42, title: 'my todo', completed: true };
+			setUpModel([todo]);
+
+			subject.setView('');
+			view.trigger('itemRemove', { id: 42 });
+
+			expect(model.remove).toHaveBeenCalledWith(42, jasmine.any(Function));
 		});
 
 		it('should remove an entry from the view', function () {
