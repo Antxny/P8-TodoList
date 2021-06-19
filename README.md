@@ -15,3 +15,7 @@ Voici les différentes étapes à réaliser lors du projet :
 ### Installation
 
 Executez la commande ``npm install`` à la racine du projet pour installer les dépendances utilisées.
+
+### Wiki
+
+Redirection vers les documents techniques
