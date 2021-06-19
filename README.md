@@ -18,4 +18,4 @@ Executez la commande ``npm install`` à la racine du projet pour installer les d
 
 ### Wiki
 
-Redirection vers les documents techniques
+[Redirection vers les documents techniques](https://github.com/Antxny/P8-TodoList/wiki)
