@@ -170,12 +170,20 @@ describe('controller', function () {
 
 	describe('toggle all', function () {
 		it('should toggle all todos to completed', function () {
-			// TODO: Doit afficher toutes les tâches complétées
-			setUpModel([]);
+			// TODO: Doit basculer toutes les tâches en "Completed"
 
-			subject.setView('#/completed');
+			var todos = [
+					{id: 21, title: 'my todo 21', completed: false},
+					{id: 42, title: 'my todo 42', completed: false}
+				]
+			setUpModel(todos);
 
-			expect(view.render).toHaveBeenCalledWith('setFilter', 'completed');
+			subject.setView('');
+
+			view.trigger('toggleAll', {completed: true});
+
+			expect(model.update).toHaveBeenCalledWith(21, {completed: true}, jasmine.any(Function));
+			expect(model.update).toHaveBeenCalledWith(42, {completed: true}, jasmine.any(Function));
 		});
 
 		it('should update the view', function () {
